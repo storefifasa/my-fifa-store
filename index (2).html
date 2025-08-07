@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>Store.FIFA | متجر كوينز FC 26</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-color: #28a745;
+      --secondary-color: #1a7a30;
+      --background-color: #f0f2f5;
+      --card-bg-color: #ffffff;
+      --header-bg-color: #1e1e1e;
+      --text-color: #333333;
+      --light-text-color: #f0f0f0;
+      --modal-overlay-color: rgba(0, 0, 0, 0.7);
+    }
+    
+    body {
+      font-family: 'Tajawal', sans-serif;
+      background-color: var(--background-color);
+      text-align: center;
+      margin: 0;
+      padding: 0;
+      color: var(--text-color);
+    }
+
+    header {
+      background-color: var(--header-bg-color);
+      color: var(--light-text-color);
+      padding: 30px;
+      border-bottom-left-radius: 20px;
+      border-bottom-right-radius: 20px;
+    }
+
+    header h1 {
+      font-weight: 700;
+      font-size: 2.5em;
+      margin: 0;
+    }
+
+    header p {
+      font-weight: 400;
+      font-size: 1.1em;
+      margin-top: 5px;
+    }
+
+    .platform-selector {
+      text-align: center;
+      padding: 20px;
+      font-size: 1.1em;
+      background-color: var(--card-bg-color);
+      margin: 20px auto;
+      width: fit-content;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    }
+    
+    .platform-selector select {
+      padding: 10px 15px;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+      font-size: 1em;
+      cursor: pointer;
+      background-color: #f9f9f9;
+      transition: all 0.3s ease;
+    }
+
+    .platform-selector select:focus {
+      outline: none;
+      border-color: var(--primary-color);
+      box-shadow: 0 0 5px rgba(40, 167, 69, 0.5);
+    }
+
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 25px;
+      padding: 30px;
+    }
+
+    .card {
+      background-color: var(--card-bg-color);
+      border-radius: 15px;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+      padding: 25px;
+      width: 220px;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    }
+
+    .card img {
+      width: 120px;
+      margin-bottom: 15px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .card h3 {
+      font-weight: 700;
+      font-size: 1.5em;
+      margin: 10px 0;
+    }
+
+    .card p {
+      font-size: 1.1em;
+      color: #666;
+    }
+
+    .btn {
+      background-color: var(--primary-color);
+      color: white;
+      border: none;
+      padding: 12px 25px;
+      cursor: pointer;
+      border-radius: 8px;
+      font-weight: bold;
+      font-size: 1em;
+      transition: background-color 0.3s, transform 0.2s;
+      margin-top: 15px;
+    }
+
+    .btn:hover {
+      background-color: var(--secondary-color);
+      transform: translateY(-2px);
+    }
+
+    /* تنسيقات النافذة المنبثقة (Modal) */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: var(--modal-overlay-color);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-overlay.show {
+      display: flex;
+    }
+
+    .modal-content {
+      background-color: var(--card-bg-color);
+      padding: 35px;
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      width: 90%;
+      max-width: 600px;
+      position: relative;
+      animation: fadeIn 0.3s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      color: #aaa;
+      font-size: 32px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: color 0.3s;
+    }
+
+    .close-btn:hover,
+    .close-btn:focus {
+      color: #666;
+      text-decoration: none;
+    }
+    
+    footer {
+      margin-top: 50px;
+      padding: 30px;
+      background: var(--header-bg-color);
+      color: var(--light-text-color);
+      border-top-left-radius: 20px;
+      border-top-right-radius: 20px;
+    }
+
+    .contact a {
+      color: var(--primary-color);
+      margin: 0 15px;
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 12px;
+      margin-top: 10px;
+      margin-bottom: 20px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      box-sizing: border-box;
+      direction: rtl;
+      text-align: right;
+      font-family: 'Tajawal', sans-serif;
+      font-size: 1em;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+      text-align: right;
+    }
+    
+    #shippingDetails h3 {
+      border-bottom: 2px solid #eee;
+      padding-bottom: 10px;
+      margin-bottom: 15px;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>🎮 Store.FIFA</h1>
+  <p>أفضل متجر لشراء كوينز FC 26</p>
+</header>
+
+<div class="platform-selector">
+    <label for="mainPlatformSelect">اختر منصة اللعب:</label>
+    <select id="mainPlatformSelect" onchange="updateCardPrices()">
+      <option value="console" selected>PlayStation / Xbox</option>
+      <option value="pc">PC</option>
+    </select>
+</div>
+
+<div class="container" id="cards-container">
+  </div>
+
+<div id="orderModal" class="modal-overlay">
+  <div class="modal-content">
+    <span class="close-btn" onclick="closeModal()">&times;</span>
+    <h2 style="text-align: center;">📝 نموذج الطلب:</h2>
+
+    <div style="background-color: #e9f5ff; padding: 15px; border-radius: 10px; margin-bottom: 25px;">
+      <p>الباقة المختارة: <span id="selectedPackageName" style="font-weight: 700;"></span></p>
+      <p>المنصة: <span id="selectedPlatformName" style="font-weight: 700;"></span></p>
+      <p>السعر: <span id="selectedPackagePrice" style="font-weight: 700;"></span> ريال</p>
+    </div>
+
+    <form id="orderForm">
+      <input type="text" id="name" placeholder="اسمك الكامل" required>
+      
+      <div class="form-group">
+        <label for="shippingMethod">اختر طريقة الشحن:</label>
+        <select id="shippingMethod" required onchange="toggleFormDetails()">
+          <option value="">اختر طريقة الشحن</option>
+          <option value="account">شحن على الحساب</option>
+          <option value="players">عرض لاعبين</option>
+        </select>
+      </div>
+
+      <div id="shippingDetails" style="text-align: right;">
+        </div>
+
+      <div class="form-group">
+        <label for="payment">اختر طريقة الدفع:</label>
+        <select id="payment" required>
+          <option value="">اختر طريقة الدفع</option>
+          <option value="تحويل بنكي">تحويل بنكي (راجحي)</option>
+          <option value="STC Pay">STC Pay</option>
+          <option value="PayPal">PayPal</option>
+        </select>
+      </div>
+
+      <button type="submit" class="btn">إرسال الطلب عبر واتساب</button>
+    </form>
+  </div>
+</div>
+
+<footer>
+  <h3>📱 تواصل معنا</h3>
+  <div class="contact">
+    <a href="https://wa.me/966532667133" target="_blank">واتساب</a> |
+    <a href="https://instagram.com/store.fifa" target="_blank">إنستقرام</a>
+  </div>
+</footer>
+
+<script>
+  // بيانات الباقات مع الأسعار الخاصة بالمنصات المدمجة
+  const packages = [
+    { name: '50K كوينز', prices: { console: 20, pc: 18 }, image: 'https://images.pexels.com/photos/163064/play-stone-network-networked-interactive-163064.jpeg?auto=compress&cs=tinysrgb&w=200' },
+    { name: '100K كوينز', prices: { console: 35, pc: 33 }, image: 'https://images.pexels.com/photos/442576/pexels-photo-442576.jpeg?auto=compress&cs=tinysrgb&w=200' },
+    { name: '250K كوينز', prices: { console: 80, pc: 75 }, image: 'https://images.pexels.com/photos/1601774/pexels-photo-1601774.jpeg?auto=compress&cs=tinysrgb&w=200' },
+    { name: '500K كوينز', prices: { console: 150, pc: 145 }, image: 'https://images.pexels.com/photos/139764/pexels-photo-139764.jpeg?auto=compress&cs=tinysrgb&w=200' },
+    { name: '1M كوينز', prices: { console: 280, pc: 275 }, image: 'https://images.pexels.com/photos/1742370/pexels-photo-1742370.jpeg?auto=compress&cs=tinysrgb&w=200' }
+  ];
+
+  const cardsContainer = document.getElementById('cards-container');
+  const mainPlatformSelect = document.getElementById('mainPlatformSelect');
+  const orderModal = document.getElementById('orderModal');
+  const packageNameSpan = document.getElementById('selectedPackageName');
+  const selectedPlatformNameSpan = document.getElementById('selectedPlatformName');
+  const packagePriceSpan = document.getElementById('selectedPackagePrice');
+  const orderForm = document.getElementById('orderForm');
+  const shippingMethodSelect = document.getElementById('shippingMethod');
+  const shippingDetailsDiv = document.getElementById('shippingDetails');
+  let currentPackage = null;
+  let currentPlatform = null;
+
+  // دالة لإنشاء بطاقات المنتجات ديناميكيًا عند تحميل الصفحة
+  function renderCards() {
+    cardsContainer.innerHTML = '';
+    const selectedPlatform = mainPlatformSelect.value;
+    packages.forEach(pkg => {
+      const price = pkg.prices[selectedPlatform];
+      const cardHtml = `
+        <div class="card" data-package-name="${pkg.name}">
+          <img src="${pkg.image}" alt="${pkg.name}">
+          <h3>${pkg.name}</h3>
+          <p class="price-display">السعر: ${price} ريال</p>
+          <button class="btn" onclick="showDetails('${pkg.name}')">اطلب الآن</button>
+        </div>
+      `;
+      cardsContainer.innerHTML += cardHtml;
+    });
+  }
+
+  // دالة لتحديث أسعار البطاقات بناءً على المنصة المختارة
+  function updateCardPrices() {
+    const selectedPlatform = mainPlatformSelect.value;
+    const cards = document.querySelectorAll('.card');
+    
+    cards.forEach(card => {
+        const packageName = card.dataset.packageName;
+        const pkg = packages.find(p => p.name === packageName);
+        const priceElement = card.querySelector('.price-display');
+        
+        if (pkg && priceElement) {
+            priceElement.textContent = `السعر: ${pkg.prices[selectedPlatform]} ريال`;
+        }
+    });
+  }
+
+  // دالة تحديث محتوى قسم التفاصيل بناءً على طريقة الشحن
+  function toggleFormDetails() {
+    const method = shippingMethodSelect.value;
+    shippingDetailsDiv.innerHTML = '';
+
+    if (method === 'account') {
+      shippingDetailsDiv.innerHTML = `
+        <h3 style="text-align: right;">تعليمات شحن الحساب:</h3>
+        <ul style="text-align: right; font-size: 14px; color: #555; list-style-type: none; padding: 0;">
+          <li>• لا تسجل دخول أثناء الشحن.</li>
+          <li>• تأكد من وجود 5,000 كوينز على الأقل بحسابك.</li>
+          <li>• أدخل كلمة مرور مؤقتة فقط.</li>
+          <li>• أرفق الأكواد الاحتياطية (حساب أورجين).</li>
+          <li>• اصرف الكمية كاملة فور الاستلام.</li>
+          <li>• <strong style="color:red;">مهم:</strong> قم بتغيير الباسورد فور الاستلام.</li>
+          <li>• <strong style="color:green;">ضمان 24 ساعة</strong> ضد الحظر أو التصفير، وفي حال حصول ذلك، يتم تعويضك بقيمة الطلب.</li>
+        </ul>
+        <h3 style="text-align: right;">معلومات الحساب:</h3>
+        <input type="text" id="account" placeholder="بريد الحساب (Origin)" required>
+        <input type="password" id="password" placeholder="كلمة المرور" required>
+        <textarea id="backupCodes" placeholder="أدخل الأكواد الاحتياطية (Origin)"></textarea>
+      `;
+    } else if (method === 'players') {
+      shippingDetailsDiv.innerHTML = `
+        <h3 style="text-align: right;">تعليمات عرض اللاعبين:</h3>
+        <ul style="text-align: right; font-size: 14px; color: #555; list-style-type: none; padding: 0;">
+          <li>• بعد إرسال الطلب، تواصل معنا عبر واتساب.</li>
+          <li>• سيتم إرسال قائمة بأسعار اللاعبين.</li>
+          <li>• بعد اختيار اللاعبين، سنرسل لك معلوماتهم لتضعهم في قائمة الانتقالات.</li>
+          <li>• سيتم شراء اللاعبين منك بالكمية المطلوبة.</li>
+          <li>• <strong style="color:green;">ضمان 24 ساعة</strong> على الباند أو التصفير، وفي حال حصول ذلك، يتم تعويضك بقيمة الطلب.</li>
+        </ul>
+      `;
+    }
+  }
+
+  // دالة إظهار النافذة المنبثقة
+  function showDetails(packageName) {
+    const cardElement = document.querySelector(`[data-package-name="${packageName}"]`);
+    const priceText = cardElement.querySelector('.price-display').textContent;
+    const priceValue = priceText.match(/\d+/)[0];
+    const platformText = mainPlatformSelect.options[mainPlatformSelect.selectedIndex].text;
+    
+    currentPackage = packages.find(pkg => pkg.name === packageName);
+    currentPlatform = platformText;
+
+    // إعادة تعيين النموذج إلى حالته الابتدائية
+    orderForm.reset();
+    shippingMethodSelect.selectedIndex = 0;
+    shippingDetailsDiv.innerHTML = '';
+    
+    // تحديث تفاصيل الباقة في نموذج الطلب
+    packageNameSpan.textContent = currentPackage.name;
+    selectedPlatformNameSpan.textContent = platformText;
+    packagePriceSpan.textContent = priceValue;
+
+    // عرض النافذة المنبثقة
+    orderModal.classList.add('show');
+    
+    // تحديث دالة إرسال النموذج لإنشاء رسالة واتساب
+    orderForm.onsubmit = function(e) {
+      e.preventDefault();
+      const name = document.getElementById("name").value;
+      const shippingMethod = shippingMethodSelect.value;
+      const payment = document.getElementById("payment").value;
+      
+      let message = `طلب جديد من Store.FIFA:\n\nالباقة: ${currentPackage.name}\nالمنصة: ${currentPlatform}\nالسعر: ${packagePriceSpan.textContent} ريال\nطريقة الشحن: ${shippingMethod === 'account' ? 'شحن على الحساب' : 'عرض لاعبين'}\nالاسم: ${name}\nطريقة الدفع: ${payment}`;
+      
+      // إضافة معلومات الحساب إذا تم اختيار طريقة الشحن "شحن على الحساب"
+      if (shippingMethod === 'account') {
+        const account = document.getElementById('account').value;
+        const password = document.getElementById('password').value;
+        const backupCodes = document.getElementById('backupCodes').value;
+        message += `\nالحساب: ${account}\nالباسورد: ${password}\nالأكواد الاحتياطية: ${backupCodes}`;
+      }
+
+      const url = `https://wa.me/966532667133?text=${encodeURIComponent(message)}`;
+      window.open(url, "_blank");
+      closeModal(); // إغلاق النافذة بعد الإرسال
+    };
+  }
+
+  // دالة إغلاق النافذة المنبثقة
+  function closeModal() {
+    orderModal.classList.remove('show');
+    orderForm.reset();
+    shippingDetailsDiv.innerHTML = '';
+    currentPackage = null;
+    currentPlatform = null;
+  }
+
+  // إغلاق النافذة عند الضغط خارج المحتوى
+  window.onclick = function(event) {
+    if (event.target == orderModal) {
+      closeModal();
+    }
+  }
+
+  // تنفيذ دالة عرض البطاقات وتحديث الأسعار عند تحميل الصفحة
+  document.addEventListener('DOMContentLoaded', () => {
+    renderCards();
+    updateCardPrices();
+  });
+</script>
+
+</body>
+</html>
