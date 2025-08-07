@@ -8,6 +8,22 @@
   <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
  <style>
     /* الألوان والخطوط الأساسية */
+   .close-btn {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  color: #aaa;
+  font-size: 32px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.close-btn:hover,
+.close-btn:focus {
+  color: #666;
+  text-decoration: none;
+}
     :root {
       --primary-color: #28a745;
       --secondary-color: #1a7a30;
@@ -278,6 +294,7 @@
 <div id="orderModal" class="modal-overlay">
   <div class="modal-content">
     <span class="close-btn" onclick="closeModal()">&times;</span>
+    <span class="close-btn" onclick="closeModal()">&times;</span>
     <h2 style="text-align: center;">📝 نموذج الطلب:</h2>
 
     <div style="background-color: #e9f5ff; padding: 15px; border-radius: 10px; margin-bottom: 25px;">
@@ -488,6 +505,7 @@
 </body>
 
 </html>
+
 
 
 
