@@ -31,6 +31,19 @@
     margin-bottom: 15px;
      margin-left: 4px; /* مسافة أسفل السعر قبل الزر */
 }
+.price-box {
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    gap: 10px;         /* مسافة بين السعر القديم والجديد */
+    flex-wrap: nowrap;  /* يمنع الانتقال لسطر جديد */
+}
+
+.price-box span {
+    font-size: 18px;
+    white-space: nowrap; /* يمنع الرقم والريال من الانكسار */
+}
+
             .old-price {
                     font-family: 'Tajawal', sans-serif;
     letter-spacing: 0.5px;
@@ -309,7 +322,7 @@ header p {
             .modal-content{ background:var(--card-bg-color); padding:35px; border-radius:15px; width:90%; max-width:600px; margin-top:50px; position:relative; box-shadow:0 8px 20px rgba(0,0,0,0.2);}
             .close-btn{ position:absolute; top:15px; left:15px; font-size:32px; color:#aaa; cursor:pointer;}
             footer{ margin-top:50px; padding:30px; background:var(--header-bg-color); color:var(--light-text-color); border-top-left-radius:20px; border-top-right-radius:20px;}
-           @media (max-width:600px) {
+          @media (max-width:600px) {
     .card {
         width: 95%;
         padding: 20px;
@@ -319,18 +332,11 @@ header p {
         width: 150px;
         margin-bottom: 20px;
     }
-    .price-box {
-        display: flex;
-        justify-content: center;
-        align-items: baseline;
-        gap: 5px;           /* مسافة صغيرة بين الرقم والريال */
-        flex-wrap: nowrap;   /* يمنع الانتقال لسطر جديد */
-    }
     .price-box span {
-        font-size: 18px;
-        white-space: nowrap;  /* يمنع الرقم أو الريال من الانكسار */
+        font-size: 20px; /* أكبر شوي للوضوح على الجوال */
     }
 }
+
 
 
             @media (max-width:600px){ .card{ width:100%; } header h1{ font-size:2em; } .container{ padding:15px; gap:15px;} }
