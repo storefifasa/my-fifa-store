@@ -483,8 +483,8 @@ header p {
                     <img src="${pkg.image}" alt="${pkg.name}">
                     <h3>${pkg.name}</h3>
                     <div class="price-box">
-                        <span class="old-price">${price.old} ﷼</span>
-                        <span class="new-price">${price.new} ﷼</span>
+                        <span class="old-price">${price.old} ريال</span>
+                        <span class="new-price">${price.new} ريال</span>
                     </div>
                     <button class="btn" onclick="showDetails('${pkg.name}')">اطلب الآن</button>
                 </div>
@@ -507,8 +507,8 @@ header p {
             if (pkg && priceBox) {
                 const price = pkg.prices[selectedPlatform];
                 priceBox.innerHTML = `
-                    <span class="old-price">${price.old} ﷼</span>
-                    <span class="new-price">${price.new} ﷼</span>
+                    <span class="old-price">${price.old} ريال</span>
+                    <span class="new-price">${price.new} ريال</span>
                 `;
             }
         });
