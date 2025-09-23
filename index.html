@@ -333,15 +333,27 @@ header p {
         padding: 15px;
         gap: 15px;
     }
+
+    /* تعديل الأسعار للجوال */
     .price-box {
-        flex-direction: column; /* السعر القديم والجديد فوق بعض على الجوال */
-        align-items: center;
+        flex-direction: row; /* جنب بعض */
+        justify-content: center;
+        align-items: baseline;
+        gap: 10px; /* مسافة بينهم */
+        flex-wrap: wrap; /* إذا الشاشة صغيرة جدًا يلتف */
+        margin-bottom: 10px;
     }
-    .price-box span {
-        display: block;
-        margin: 5px 0;
+    .price-box .old-price {
+        font-size: 0.85em; /* أصغر شوي */
+        color: #999;
+    }
+    .price-box .new-price {
+        font-size: 1.2em; /* واضح وكبير */
+        font-weight: 700;
+        color: var(--primary-color);
     }
 }
+
 
 
 
