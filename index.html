@@ -206,6 +206,53 @@ header h1:hover {
     transform: scale(1.05);
     color: #fffb00;
 }
+.national-day-banner {
+    background: linear-gradient(135deg, #168c6b, #04b510); /* تدرج أخضر */
+    color: #ffffff;
+    text-align: center;
+    padding: 25px 20px;
+    border-radius: 15px;
+    margin: 20px auto;
+    width: 90%;
+    max-width: 900px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.national-day-banner h2 {
+    font-size: 2em;
+    margin: 0;
+    font-weight: 700;
+}
+
+.national-day-banner p {
+    font-size: 1.2em;
+    margin: 10px 0 15px;
+}
+
+.national-day-banner .discount {
+    font-weight: 900;
+    font-size: 1.5em;
+    color: #ffeb3b; /* لتبرز الخصم */
+}
+
+.national-day-banner .btn {
+    background: #ffffff;
+    color: #047857;
+    padding: 12px 25px;
+    font-weight: 700;
+    border-radius: 25px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+.national-day-banner .btn:hover {
+    background: #10b981;
+    color: #ffffff;
+    transform: scale(1.05);
+}
+
 
 header p {
     font-weight: 500;
@@ -231,6 +278,13 @@ header p {
         <h1>🎮 Store.FIFA</h1>
         <p>أفضل متجر لشراء كوينز FC 26</p>
     </header>
+<div class="national-day-banner">
+    <div class="banner-content">
+        <h2>عروض اليوم الوطني 95 SA!</h2>
+        <p>خصم حتى <span class="discount">25%</span> على جميع باقات كوينز FC 26</p>
+        <button class="btn" onclick="scrollToCards()">تسوق الآن</button>
+    </div>
+</div>
 
     <div class="platform-selector">
         <label for="mainPlatformSelect">اختر منصة اللعب:</label>
@@ -307,11 +361,11 @@ header p {
     <script>
         // الباقات مع old/new لكل منصة
         const packages = [
-            { name: '50K كوينز', prices: { console: { old: 95, new: 45 }, pc: { old: 95, new: 45 } }, image: 'coins.png' },
-            { name: '100K كوينز', prices: { console: { old: 120, new: 62 }, pc: { old: 120, new: 62 } }, image: 'coins.png' },
-            { name: '250K كوينز', prices: { console: { old: 200, new: 156 }, pc: { old: 200, new: 156 } }, image: 'coins.png' },
-            { name: '500K كوينز', prices: { console: { old: 360, new: 300 }, pc: { old: 360, new: 300 } }, image: 'coins.png' },
-            { name: '1M كوينز', prices: { console: { old: 650, new: 575 }, pc: { old: 650, new: 575 } }, image: 'coins.png' }
+            { name: '50K كوينز', prices: { console: { old: 70, new: 39 }, pc: { old: 70, new: 39 } }, image: 'coins.png' },
+            { name: '100K كوينز', prices: { console: { old: 100, new: 59 }, pc: { old: 100, new: 59 } }, image: 'coins.png' },
+            { name: '250K كوينز', prices: { console: { old: 200, new: 149 }, pc: { old: 200, new: 149 } }, image: 'coins.png' },
+            { name: '500K كوينز', prices: { console: { old: 360, new: 288 }, pc: { old: 360, new: 288 } }, image: 'coins.png' },
+            { name: '1M كوينز', prices: { console: { old: 650, new: 549 }, pc: { old: 650, new: 549 } }, image: 'coins.png' }
         ];
 
         // عناصر DOM
@@ -330,6 +384,9 @@ header p {
         let currentPlatform = null;
 
         // render cards
+        function scrollToCards() {
+    document.getElementById('cards-container').scrollIntoView({ behavior: 'smooth' });
+}
     function renderCards() {
         cardsContainer.innerHTML = '';
         const selectedPlatform = mainPlatformSelect.value;
