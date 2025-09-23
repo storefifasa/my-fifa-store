@@ -17,7 +17,7 @@
     font-size: 1.4em;          /* أكبر شوي */
     font-weight: 800;           /* أكثر بروز */
     margin: 15px 0 15px 0;      /* مسافة مناسبة من الأعلى والأسفل */
-    color: #1a1a1a;             /* لون داكن وواضح */
+    color: var(--text-color);           /* لون داكن وواضح */
     text-shadow: 1px 1px 2px rgba(0,0,0,0.1); /* ظل خفيف لإبراز الاسم */
     letter-spacing: 0.5px;      /* مسافة بين الحروف لطابع أكثر فخامة */
 }
@@ -77,13 +77,17 @@
 
             /* بقية ستايلاتك (اختصرت الباقي لكن تركته كما كان) */
             :root {
-                --background-color: #f0f2f5;
-                --card-bg-color: #ffffff;
-                --header-bg-color: #1e1e1e;
-                --text-color: #333333;
-                --light-text-color: #f0f0f0;
-                --modal-overlay-color: rgba(0,0,0,0.7);
-            }
+  --background-color: #f0f2f5;
+  --card-bg-color: #ffffff;
+  --header-bg-color: #1e1e1e;
+  --text-color: #333333;
+  --text-light-color: #f0f0f0;
+  --text-accent-color: #0072ff; /* للزر أو النصوص المهمة */
+  --price-old-color: #999999;
+  --price-new-color: #0072ff;
+  --modal-overlay-color: rgba(0,0,0,0.7);
+}
+
             .card {
         background: #fff;
         border-radius: 15px;
@@ -295,15 +299,13 @@ header h1:hover {
     color: #ffffff;
     transform: scale(1.05);
 }
-
-
 header p {
     font-weight: 500;
     font-size: 1.3em;
     margin-top: 12px;
     text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
 }          
-  .platform-selector{ text-align:center; padding: 25px 15px; font-size: 1.2em; background-color: #fff; margin:20px auto; width:fit-content; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.08);margin-bottom: 25px; }
+  .platform-selector{ text-align:center; padding: 25px 15px; font-size: 1.2em; background-color:var(--background-color); margin:20px auto; width:fit-content; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.08);margin-bottom: 25px; }
             .platform-selector select{ padding:10px 15px; border-radius:8px; border:1px solid #ddd; font-size:1em; cursor:pointer; background-color:#f9f9f9; transition:all .3s;}
             .container{ display:flex; flex-wrap:wrap; justify-content:center; gap:25px; padding:30px;}
             .card{ background:var(--card-bg-color); border-radius:15px; box-shadow:0 6px 16px rgba(0,0,0,0.1); padding:25px; width:220px; transition:transform .3s, box-shadow .3s;}
@@ -314,8 +316,7 @@ header p {
             .modal-content{ background:var(--card-bg-color); padding:35px; border-radius:15px; width:90%; max-width:600px; margin-top:50px; position:relative; box-shadow:0 8px 20px rgba(0,0,0,0.2);}
             .close-btn{ position:absolute; top:15px; left:15px; font-size:32px; color:#aaa; cursor:pointer;}
             footer{ margin-top:50px; padding:30px; background:var(--header-bg-color); color:var(--light-text-color); border-top-left-radius:20px; border-top-right-radius:20px;}
-          
-
+        
 @media (max-width:600px) {
     .card {
         width: 95%;
@@ -354,8 +355,151 @@ header p {
     }
 }
 
+/* الوضع الفاتح */
+body.light-mode {
+    --background-color: #f0f2f5;
+    --card-bg-color: #ffffff;
+    --header-bg-color: #1e1e1e;
+    --text-color: #333333;
+    --text-light-color: #f0f0f0;
+    --modal-overlay-color: rgba(0,0,0,0.7);
+}
+
+/* الوضع الداكن */
+body.dark-mode {
+    --background-color: #121212;
+    --card-bg-color: #1e1e1e;
+    --header-bg-color: #1b1b1b;
+    --text-color: #e0e0e0;
+    --text-light-color: #ffffff;
+    --modal-overlay-color: rgba(0,0,0,0.7);
+}
+
+/* تطبيق المتغيرات */
+body {
+    font-family: 'Tajawal', sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: var(--header-bg-color);
+    color: var(--text-light-color);
+}
+
+.card {
+    background-color: var(--card-bg-color);
+    color: var(--text-color);
+}
+
+.modal-overlay {
+    background-color: var(--modal-overlay-color);
+}
+
+/* الزر أعلى الزاوية */
+#darkModeToggle {
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 24px;
+}
 
 
+/* الوضع العادي */
+.modal-content {
+    background-color: var(--card-bg-color);
+    color: var(--text-color);
+}
+
+.modal-content label {
+    color: var(--text-color);
+}
+
+.modal-content input,
+.modal-content select {
+    background-color: #fff;
+    color: #000;
+    border: 1px solid #ccc;
+}
+
+/* الوضع الليلي */
+body.dark-mode .modal-content {
+    background-color: #1e1e1e; /* خلفية داكنة للمودال */
+    color: #f0f0f0;
+}
+
+body.dark-mode .modal-content label {
+    color: #f0f0f0;
+}
+
+body.dark-mode .modal-content input,
+body.dark-mode .modal-content select {
+    background-color: #2a2a2a; /* خلفية داكنة للحقول */
+    color: #f0f0f0;            /* النص أبيض */
+    border: 1px solid #444;
+}
+
+body.dark-mode .modal-content input::placeholder {
+    color: #bbb; /* النص داخل الحقل */
+}
+/* النص داخل الحقول (placeholder) في الوضع العادي */
+.modal-content input::placeholder,
+.modal-content select::placeholder {
+    color: #666; /* رمادي غامق */
+}
+
+/* النص داخل الحقول (placeholder) في الوضع الليلي */
+body.dark-mode .modal-content input::placeholder,
+body.dark-mode .modal-content select::placeholder {
+    color: #bbb; /* رمادي فاتح يبين على الخلفية الداكنة */
+}
+/* ✅ النصوص داخل الحقول (الوضع العادي) */
+.modal-content input,
+.modal-content select,
+.modal-content textarea {
+    color: #000;                /* النص أسود */
+    background-color: #fff;     /* خلفية بيضاء */
+    border: 1px solid #ccc;     /* حدود رمادية */
+}
+
+/* ✅ النصوص داخل الحقول (الوضع الليلي) */
+body.dark-mode .modal-content input,
+body.dark-mode .modal-content select,
+body.dark-mode .modal-content textarea {
+    color: #f0f0f0;             /* النص أبيض فاتح */
+    background-color: #2a2a2a;  /* خلفية داكنة */
+    border: 1px solid #444;     /* حدود أغمق */
+}
+
+/* ✅ النصوص الـ Placeholder */
+.modal-content input::placeholder,
+.modal-content textarea::placeholder {
+    color: #666;  /* رمادي غامق بالوضع العادي */
+}
+
+body.dark-mode .modal-content input::placeholder,
+body.dark-mode .modal-content textarea::placeholder {
+    color: #bbb;  /* رمادي فاتح بالوضع الليلي */
+}
+/* للوضع الليلي */
+body.dark-mode input,
+body.dark-mode textarea,
+body.dark-mode select {
+  background-color: #222;   /* خلفية غامقة */
+  color: #fff;             /* نص أبيض */
+  border: 1px solid #444;  /* حدود أوضح */
+}
+
+/* إذا النص placeholder (النص الرمادي داخل الحقل) ما بيبين */
+body.dark-mode input::placeholder,
+body.dark-mode textarea::placeholder {
+  color: #bbb; /* خلي اللون رمادي فاتح */
+}
 
         </style>
     </head>
@@ -364,6 +508,8 @@ header p {
         <h1>🎮 Store.FIFA</h1>
         <p>أفضل متجر لشراء كوينز FC 26</p>
     </header>
+    <button id="darkModeToggle">🌙</button>
+
 <div class="national-day-banner">
     <div class="banner-content">
         <h2>عروض اليوم الوطني 95 SA!</h2>
@@ -387,7 +533,7 @@ header p {
             <span class="close-btn" onclick="closeModal()">&times;</span>
             <h2 style="text-align:center;">📝 نموذج الطلب:</h2>
 
-            <div style="background-color:#e9f5ff; padding:15px; border-radius:10px; margin-bottom:25px; text-align:right;">
+            <div style="background-color: var(--background-color);padding:15px; border-radius:10px; margin-bottom:25px; text-align:right;">
                 <p>الباقة المختارة: <span id="selectedPackageName" style="font-weight:700;"></span></p>
                 <p>المنصة: <span id="selectedPlatformName" style="font-weight:700;"></span></p>
 
@@ -614,6 +760,32 @@ header p {
             renderCards();
             updateCardPrices();
         });
+        const darkModeBtn = document.getElementById('darkModeToggle');
+
+// تحميل الوضع السابق من localStorage
+if (localStorage.getItem('theme') === 'dark') {
+    document.body.classList.add('dark-mode');
+    darkModeBtn.textContent = '☀️';
+} else {
+    document.body.classList.add('light-mode');
+    darkModeBtn.textContent = '🌙';
+}
+
+// التبديل عند الضغط
+darkModeBtn.addEventListener('click', () => {
+    if (document.body.classList.contains('dark-mode')) {
+        document.body.classList.remove('dark-mode');
+        document.body.classList.add('light-mode');
+        darkModeBtn.textContent = '🌙';
+        localStorage.setItem('theme', 'light');
+    } else {
+        document.body.classList.remove('light-mode');
+        document.body.classList.add('dark-mode');
+        darkModeBtn.textContent = '☀️';
+        localStorage.setItem('theme', 'dark');
+    }
+});
+
     </script>
     </body>
     </html>
